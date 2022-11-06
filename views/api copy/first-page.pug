@@ -1,0 +1,19 @@
+extends layoutAPI
+
+block body-content
+
+    body.nav-md
+        include partials/modal
+
+        .container.body
+            .main_container
+                include partials/sidebar
+                include partials/header
+
+                block content
+
+                include partials/footer
+
+        // lock screen
+        include  partials/lock-screen
+        // /lock screen
