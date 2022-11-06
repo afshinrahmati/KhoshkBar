@@ -1,0 +1,85 @@
+extends ../body-layout
+
+
+block styles
+    // Switchery
+    link(href="/css/switchery.min.css" rel="stylesheet")
+
+
+block content
+
+    // page content
+    .right_col(role="main")
+        div
+            .page-title
+                h4.title_left.m-b-15
+                    a(href="/v1.0/admin") خانه
+                    i.fa.fa-chevron-left.p-r-5.p-l-5
+                    a(href="/v1.0/admin/users") لیست کاربران
+                    i.fa.fa-chevron-left.p-r-5.p-l-5
+                    | ویرایش کاربر:
+                    if(info)
+                        | #{info.name}
+            .clearfix
+            .row
+                .col-md-12.col-sm-12.col-xs-12
+                    .x_panel
+                        .x_title
+                            h2
+                                | ویرایش کاربر
+                            ul.nav.navbar-right.panel_toolbox
+                                li
+                                    a.collapse-link
+                                        i.fa.fa-chevron-up
+                            .clearfix
+
+                        include ../partials/show-errors
+
+                        if(info)
+                            .x_content
+                                form.form-horizontal.form-label-left(action="/v1.0/admin/users/" + info._id + "" method="POST" novalidate="")
+                                    input(type="hidden" name="_method" value="PATCH")
+                                    .item.form-group
+                                        label.control-label.col-md-3.col-sm-3.col-xs-12(for="name")
+                                            | نام
+                                            span.required *
+                                        .col-md-6.col-sm-6.col-xs-12
+                                            input#name.form-control.col-md-7.col-xs-12(data-validate-length-range="6" name="name" required="required" type="text" value=info.name)
+                                    .item.form-group
+                                        label.control-label.col-md-3.col-sm-3.col-xs-12(for="email")
+                                            | ایمیل
+                                            span.required *
+                                        .col-md-6.col-sm-6.col-xs-12
+                                            input#email.form-control.col-md-7.col-xs-12(type="email" name="email" required="required" value=info.username)
+                                    .item.form-group
+                                        label.control-label.col-md-3(for="password") رمز عبور
+                                        .col-md-6.col-sm-6.col-xs-12
+                                            input#password.form-control.col-md-7.col-xs-12(type="password" name="password" data-validate-length="6")
+                                    .item.form-group
+                                        label.control-label.col-md-3.col-sm-3.col-xs-12(for="password2") تکرار رمز عبور
+                                        .col-md-6.col-sm-6.col-xs-12
+                                            input#password2.form-control.col-md-7.col-xs-12(type="password" name="password2" data-validate-linked="password")
+                                    .item.form-group
+                                        label.control-label.col-md-3.col-sm-3.col-xs-12(for="status") وضعیت
+                                        .col-md-6.col-sm-6.col-xs-12
+                                            input#status.js-switch(type="checkbox" name="status" value="1" checked=(info.status === ActivationStatus.Active ? "checked" : undefined))
+                                    .item.form-group
+                                        label.control-label.col-md-3.col-sm-3.col-xs-12(for="role")
+                                            | نقش
+                                            span.required *
+                                        .col-md-6.col-sm-6.col-xs-12
+                                            select#role.form-control.col-md-7.col-xs-12(required="required" name="role")
+                                                each val in roles
+                                                    option(value=val.id, selected = (info.role == val.id)) #{val.title}
+                                    .ln_solid
+                                    .form-group
+                                        .col-md-6.col-md-offset-3
+                                            button#send.btn.btn-success(type="submit") ارسال
+                                            button.btn.btn-danger(type="button" onclick="window.location='/v1.0/admin/users'") انصراف
+
+
+block scripts
+    // Validator
+    script(src="/js/validator.js")
+    // Switchery
+    script(src="/js/switchery.min.js")

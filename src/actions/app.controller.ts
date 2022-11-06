@@ -6,7 +6,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @Render('api/first-page')
+  @Render('users/create')
   getHello(): {message: string} {
     return this.appService.getHello();
   }

@@ -1,0 +1,167 @@
+extends ../body-layout
+
+
+block styles
+    // Switchery
+    link(href="/css/switchery.min.css" rel="stylesheet")
+
+
+block content
+
+    // page content
+    .right_col(role="main")
+        div
+            .page-title
+                h4.title_left.m-b-15
+                    a(href="/v1.0/admin") خانه
+                    i.fa.fa-chevron-left.p-r-5.p-l-5
+                    a(href="/v1.0/admin/personnel") لیست پرسنل
+                    i.fa.fa-chevron-left.p-r-5.p-l-5
+                    | ثبت پرسنل
+            .clearfix
+            .row
+                .col-md-12.col-sm-12.col-xs-12
+                    .x_panel
+                        .x_title
+                            h2
+                                | ثبت پرسنل جدید
+                            ul.nav.navbar-right.panel_toolbox
+                                li
+                                    a.collapse-link
+                                        i.fa.fa-chevron-up
+                            .clearfix
+
+                        include ../partials/show-errors
+
+                        .x_content
+                            form#form.form-horizontal.form-label-left(action="" method="post" enctype="multipart/form-data")
+
+                                .autoSelection.notifRow()
+                                    .item.form-group
+                                        label.control-label.col-md-3.col-sm-3.col-xs-12(for="drop")
+                                            | انتخاب روش اضافه کردن پرنسل
+                                        .col-md-6.col-sm-6.col-xs-12
+                                            select#drop.form-control.col-md-7.col-xs-12(name="drop" required="required")
+                                                option(value=0) اضافه کردن یک فرد
+                                                option(value=1) اضافه کردن چندین فرد
+                                .item.form-group#national
+                                    label.control-label.col-md-3.col-sm-3.col-xs-12(for="national")
+                                        | کدملی
+                                        span.required *
+                                    .col-md-6.col-sm-6.col-xs-12
+                                        input#code.form-control.col-md-7.col-xs-12(data-validate-length-range="9" name="national" required="required" type="text" value=body ? body.national : "")
+
+                                .item.form-group#phoneNumber
+                                    label.control-label.col-md-3.col-sm-3.col-xs-12(for="phoneNumber")
+                                        | شماره تماس
+                                        span.required *
+                                    .col-md-6.col-sm-6.col-xs-12
+                                        input#mobile.form-control.col-md-7.col-xs-12(data-validate-length-range="" name="phoneNumber"  placeholder="مثال:09108348429" required="required" type="text" value=body ? body.national : "")
+                                .item.form-group#fieldName
+                                    label.control-label.col-md-3.col-sm-3.col-xs-12(for="fieldName")
+                                        | آپلود فایل
+                                        span.required *
+                                    .col-md-6.col-sm-6.col-xs-12
+                                        input#file.form-control.col-md-7.col-xs-12( name="excelFile" required="required" type="file" value=body ? body.file : "")
+                                        p نکته: توجه داشته باشید فرمت فایل اکسل (xlsx) باشد و داری دو ستون که,در ستون قسمت اول شماره تماس پرسنل و در ستون قسمت دوم کد ملی پرسنل قرار گرفته باشد
+                            .form-group
+                                .col-md-6.col-md-offset-3
+                                    if(exist)
+                                        span#text_error #{exist}
+                            .form-group
+                                .col-md-6.col-md-offset-3
+                                    button#send.btn.btn-success(type="submit") ارسال
+                                    button.btn.btn-danger(type="button" onclick="window.location='/v1.0/admin/personnel'") انصراف
+                            br
+                            br
+                        if(file_user)
+                            if(file_user.user_duplicate.length > 0)
+                                h4 لیست پرسنلی که قبلا در سامانه ثبت نام بوده اند
+                                table.table.table-striped
+                                        tr
+                                            th شماره تماس
+                                            th  کد ملی
+                                        each n in file_user.user_duplicate
+                                            tr
+                                                td #{n.mobile}
+                                                td #{n.code}
+                            if(file_user.user_mobile.length > 0)
+                                h4 لیست پرسنلی که شماره موبایل آنها اشتباه وارد شده است
+                                table.table.table-striped
+                                        tr
+                                            th شماره تماس
+                                            th کد ملی
+                                        each n in file_user.user_mobile
+                                            tr
+                                                td #{n.mobile}
+                                                td #{n.code}
+
+                            if(file_user.user_code_melli)
+                                h4 لیست پرسنلی که کدملی آنها اشتباه وارد شده است
+                                table.table.table-striped
+                                    tr
+                                        th شماره تماس
+                                        th کد ملی
+                                    each n in file_user.user_code_melli
+                                        tr
+                                            td 09351426741
+                                            td 000000000
+                            hr
+                            h4  تعداد ثبت نام موفق پرسنل در این عملیات :
+                                p #{file_user.user_successful.length}
+
+
+block scripts
+    script(src="/js/sweetalert2.all.min.js")
+    // Validator
+    script(src="/js/validator.js")
+    // Switchery
+    script(src="/js/switchery.min.js")
+    script.
+
+        $("#national").show();
+        $("#phoneNumber").show();
+        $("#fieldName").hide();
+
+        $("#drop").change(function (val) {
+            const value = $("option:selected", this).val();
+            if(value === "0"){
+                $("#national").show();
+                $("#phoneNumber").show();
+                $("#fieldName").hide();
+            }else {
+                $("#national").hide();
+                $("#phoneNumber").hide();
+                $("#fieldName").show();
+            }
+        })
+
+        $("#send").on("click",()=>{
+            const code =  $("#mobile").val();
+            const phone =  $("#code").val();
+            const value = $("option:selected").val();
+            if(value === "0"){
+                if(!phone || !code){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'اخطار! فلید خالی',
+                        text: 'لطفا فایل خالی را پر نمایید!',
+                    });
+                }else {
+                    $('#form').submit();
+                }
+            }else {
+                const fieldName = $("#file").val();
+                if(fieldName){
+                    $('#form').submit();
+                }else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'اخطار! فلید  فایل اکسل خالی',
+                        text: 'لطفا فایل خالی را پر نمایید!',
+                    });
+                }
+            }
+
+
+        })

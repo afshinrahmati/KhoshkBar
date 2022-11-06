@@ -1,0 +1,98 @@
+extends body-layout
+
+
+block styles
+    // Datepicker
+    link(href="/css/persian-datepicker.css" rel="stylesheet")
+
+
+block content
+    .right_col(role="main")
+        div
+
+                .row.top_tiles
+                        .animated.flipInY.col-lg-3.col-md-3.col-sm-6.col-xs-12
+                            .tile-stats
+                                .icon
+                                    i.fa.fa-list-alt
+                                .count 2
+                                h3 قراردادها
+                                p تعداد کل قراردادها
+
+                        .animated.flipInY.col-lg-3.col-md-3.col-sm-6.col-xs-12
+                            .tile-stats
+                                .icon
+                                    i.fa.fa-building
+                                .count 3
+                                h3 شرکت ها
+                                p تعداد کل شرکت ها
+
+                        .animated.flipInY.col-lg-3.col-md-3.col-sm-6.col-xs-12
+                            .tile-stats
+                                .icon
+                                    i.fa.fa-money
+                                .count 4
+                                h3 تراکنش های بانکی
+                                p تعداد تراکنش های موفق
+
+                        .animated.flipInY.col-lg-3.col-md-3.col-sm-6.col-xs-12
+                            .tile-stats
+                                .icon
+                                    i.fa.fa-shopping-basket
+                                .count 5
+                                h3 سفارش ها
+                                p تعداد سفارش های موفق
+
+
+
+
+
+block scripts
+    // Datepicker
+    script(src="/js/persian-date.min.js")
+    script(src="/js/persian-datepicker.min.js")
+
+    script.
+        // Datepicker
+        $(document).ready(function () {
+            $('.startDatepicker').persianDatepicker({
+                format: 'YYYY-MM-DD',
+                initialValue: false,
+                initialValueType: 'persian',
+                onSelect: function (unix) {
+                    $('.endDatepicker').persianDatepicker({
+                        format: 'YYYY-MM-DD',
+                        minDate: new persianDate(unix),
+                        initialValueType: 'persian',
+                    });
+                }
+            });
+            $('.endDatepicker').persianDatepicker({
+                format: 'YYYY-MM-DD',
+                initialValue: false,
+                initialValueType: 'persian',
+            });
+        });
+
+        // Chart
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: !{JSON.stringify(chartValues)},
+                labels: !{JSON.stringify(chartLabels)}
+            },
+            options: {
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });

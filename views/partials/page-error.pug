@@ -1,0 +1,15 @@
+extends ../layout
+
+block body-content
+    body.nav-md
+        .container.body
+            .main_container
+                // page content
+                .col-md-12
+                    .col-middle
+                        .text-center
+                            h2.text-default
+                                if (message)
+                                    | #{message}
+                                else
+                                    | #{name}

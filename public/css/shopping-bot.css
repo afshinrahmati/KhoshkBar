@@ -1,0 +1,48 @@
+.radio input {
+    appearance: none;
+    border-radius: 2px;
+    background: #fdfdfd;
+    color: #40580499;
+    font-size: 14px;
+    outline: none;
+    width: 158px;
+    text-align: center;
+    height: 25px;
+}
+.radio{
+    margin-left: 7pc;
+
+}
+.radio input:checked {
+    background: #26b99a;
+    color: #FFFFFF;
+    box-shadow: 1px 1px 10px #0000002e;
+    outline: none;
+}
+
+.radio input:before {
+    content: attr(label);
+    text-align: center;
+    outline: none;
+}
+input{
+    background: #fcfffe;
+    box-shadow: 1px 1px 10px #f3dbdb;
+    border-radius: 3px;
+    height: 35px;
+    border: none;
+    outline: none;
+
+}
+textarea{
+    border: none;
+    outline: none !important;
+    background: #fcfffe;
+    box-shadow: 1px 1px 10px #f3dbdb;
+    border-radius: 3px;
+    margin-right: 38px;
+    overflow: auto;
+}
+
+
+

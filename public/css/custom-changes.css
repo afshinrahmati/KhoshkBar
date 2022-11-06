@@ -1,0 +1,162 @@
+/* Bootstrap manual changes */
+.label{
+    font-size: 85%;
+    margin: 3px;
+}
+
+/* Theme manual changes */
+.login_wrapper .item .alert{
+    position: absolute;
+    top: 0;
+    left: -170px;
+    right: auto;
+}
+.tile_count .tile_stats_count{
+    width: 20%;
+}
+@media (max-width:1200px){
+    .tile_count .tile_stats_count{
+        width: 33.3%;
+    }
+}
+@media (max-width:480px){
+    .tile_count .tile_stats_count{
+        width: 100%;
+    }
+}
+.tile_count .tile_stats_count .count{
+    font-size: 25px;
+}
+
+/* Datatable manual changes */
+input[aria-controls=datatable-responsive], select[aria-controls=datatable-responsive] {
+    height: 30px;
+    line-height: 30px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    /*border-radius: 4px;*/
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+a.paginate_button, span.ellipsis {
+    float: right;
+}
+
+/* Datepicker manual changes */
+.datepicker-plot-area{
+    width: 250px;
+}
+
+/* Select2 manual changes */
+.select2-container{
+    width: 100% !important;
+}
+
+/* Add manual styles */
+.modal-image-contaier{
+    height: 600px;
+    overflow-y: auto;
+}
+.modal-image-contaier .thumbnail{
+    height: 100px;
+    margin-bottom: 0;
+}
+.modal-image-contaier img{
+    display: inline-block !important;
+    width: 100%;
+    max-height: 90px;
+}
+
+.discovery-preview-box {
+    width: 500px;
+    height: 150px;
+    margin: 0 calc((100% - 500px)/2) 20px;
+    position: relative;
+}
+.discovery-preview-box div {
+    height: 148px;
+    width: 100%;
+    float: left;
+}
+.discovery-preview-box div img {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: 1px solid #CCC;
+}
+
+.discovery-model-0 div:first-child, .discovery-model-7 div:first-child, .discovery-model-8 div:first-child{
+    width: 100%;
+}
+
+.discovery-model-1 div:first-child{
+    width: 66%;
+}
+.discovery-model-1 div:nth-child(2){
+    width: 34%;
+}
+
+.discovery-model-2 div:first-child{
+    width: 34%;
+}
+.discovery-model-2 div:nth-child(2){
+    width: 66%;
+}
+
+.discovery-model-3 div:first-child, .discovery-model-3 div:nth-child(2){
+    width: 50%;
+}
+
+.discovery-model-4 div:first-child, .discovery-model-4 div:nth-child(2){
+    width: 34%;
+    height: 74px;
+}
+.discovery-model-4 div:nth-child(2){
+    position: absolute;
+    left: 0;
+    top: 74px;
+}
+.discovery-model-4 div:nth-child(3){
+    width: 66%;
+}
+
+.discovery-model-5 div:first-child{
+    width: 66%;
+}
+.discovery-model-5 div:nth-child(2), .discovery-model-5 div:nth-child(3){
+    width: 34%;
+    height: 74px;
+}
+
+.discovery-model-6 div:first-child, .discovery-model-6 div:nth-child(2), .discovery-model-6 div:nth-child(3){
+    width: 33.3%;
+}
+
+.full-screen-height {
+    height: 100vh !important;
+}
+
+.remove-file {
+    position: absolute;
+    right: 5px;
+    top: -10px;
+    border: 1px solid #DDD;
+    border-radius: 150px;
+    padding: 3px 5px;
+    background: #FFF;
+    cursor: pointer;
+}
+
+.text-break {
+    overflow-wrap: break-word;
+}
+.divider {
+    margin: 0;
+}
