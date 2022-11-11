@@ -1,0 +1,15 @@
+if error
+    .alert.alert-danger.alert-dismissible.fade.in(role="alert")
+        button.close(type="button" data-dismiss="alert" aria-label="Close")
+            span(aria-hidden="true") ×
+        strong خطای
+            | #{error.status}!
+            | #{error.message}
+else if  errors
+    .alert.alert-danger.alert-dismissible.fade.in(role="alert")
+        button.close(type="button" data-dismiss="alert" aria-label="Close")
+            span(aria-hidden="true") ×
+        each val, index in errors
+            strong
+                | #{val}
+            br

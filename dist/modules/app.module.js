@@ -10,11 +10,21 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("../actions/app.controller");
 const app_service_1 = require("../services/app.service");
+const path = require("path");
+const nestjs_i18n_1 = require("nestjs-i18n");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
+        imports: [
+            nestjs_i18n_1.I18nModule.forRoot({
+                fallbackLanguage: 'en',
+                loaderOptions: {
+                    path: path.join(__dirname, '/i18n/'),
+                },
+                viewEngine: 'ejs'
+            })
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

@@ -1,0 +1,17 @@
+extends ../layout
+
+block body-content
+    body.nav-md
+        .container.body
+            .main_container
+                // page content
+                .col-md-12
+                    .col-middle
+                        .text-center.text-center
+                            h1.error-number.text-danger 403
+                            h2 خطای سطح دسترسی
+                            p
+                                | متاسفانه شما به این صفحه دسترسی ندارید
+                            .mid_center
+                                h3
+                                    a(href="/v1.0/admin") بازگشت به صفحه اصلی
