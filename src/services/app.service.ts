@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
+import { Slider } from "src/types/slider";
+import { I18n, I18nContext } from 'nestjs-i18n';
 
 @Injectable()
 export class AppService {
-  getHello(): {message: string} {
+  getHello(@I18n() i18n: I18nContext):any {
 
-    console.log(85);
-    
-    return {message: 'Hello World!'} ;
+    return { username: i18n.t("messgae.HELLO"),t:i18n };
   }
 }
